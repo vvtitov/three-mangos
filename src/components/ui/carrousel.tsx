@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-type CarouselProps = {
+type CarrouselProps = {
   items: {
     title: string;
     image: string;
@@ -13,12 +13,12 @@ type CarouselProps = {
 };
 
 // Exportación con nombre para los componentes que la importan con { Carousel }
-export const Carousel = ({
+export const Carrousel = ({
   items,
   loop = true,
   autoPlay = true,
   interval = 5000,
-}: CarouselProps) => {
+}: CarrouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -135,7 +135,7 @@ export const Carousel = ({
           transition={{ duration: 0.5, ease: "easeInOut" }}
           style={{
             position: "absolute",
-            inset: 0
+            inset: 0,
           }}
         >
           <Slide item={items[currentIndex]} />
@@ -166,8 +166,7 @@ const Slide = ({ item }: { item: { title: string; image: string } }) => {
       <img
         src={item.image}
         alt={item.title}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+        className="object-cover"      />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
       <div className="absolute bottom-10 left-10 text-white">
         <h3 className="text-2xl font-bold">{item.title}</h3>
@@ -177,4 +176,4 @@ const Slide = ({ item }: { item: { title: string; image: string } }) => {
 };
 
 // Exportación predeterminada para compatibilidad con los componentes existentes
-export default Carousel;
+export default Carrousel;

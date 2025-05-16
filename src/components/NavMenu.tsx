@@ -22,7 +22,7 @@ export default function NavMenu() {
 
   return (
     <>
-      <div id="navmenu" className="w-full bg-primary">
+      <div id="navmenu" className="w-full bg-background">
         <NavigationMenu>
           <NavigationMenuList className="flex justify-end">
             <NavigationMenuItem>

@@ -1,13 +1,10 @@
-"use client";
+import Carrousel from "@/components/ui/carrousel";
 
-import React from "react";
-import Carousel from "./ui/carousel";
-
-export default function ServicesCarousel() {
+export default function ServicesCarrousel() {
   return (
     <>
-      <div className="flex overflow-hidden justify-center p-3">
-        <Carousel
+      <div className="relative justify-center p-3 h-[600px] w-[70vmin]">
+        <Carrousel interval={5000} autoPlay={true} loop={true}
           items={[
             {
               title: "Diseño Web",

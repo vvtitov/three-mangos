@@ -1,7 +1,7 @@
-import { TabsServices } from "./AnimatedTab";
-import AcordionServices from "./AcordionServices";
-import ServicesCarousel from "./ServicesCarrousel";
-import { FlipWords } from "./ui/flip-words";
+import { TabsServices } from "@/components/AnimatedTab";
+import AcordionServices from "@/components/AcordionServices";
+import ServicesCarrousel from "@/components/ServicesCarrousel";
+import { FlipWords } from "@/components/ui/flip-words";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getDictionary } from "@/i18n/dictionaries";
 import { Separator } from "@radix-ui/react-separator";
@@ -38,7 +38,7 @@ export default function Services() {
           {dictionary.services.carouselTitle}
         </h2>
       </div>
-      <ServicesCarousel />
+      <ServicesCarrousel />
       <Separator className="h-px bg-foreground/50 mt-20 mx-auto w-2/4" />
 
       <div className="flex flex-col items-center max-w-5xl w-full mx-auto px-10 py-20">
