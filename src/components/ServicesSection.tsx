@@ -1,5 +1,5 @@
 import { TabsServices } from "@/components/AnimatedTab";
-import AcordionServices from "@/components/AcordionServices";
+import AcordionServices from "@/components/AcordionFaqs";
 import ServicesCarrousel from "@/components/ServicesCarrousel";
 import { FlipWords } from "@/components/ui/flip-words";
 import { useLanguage } from "@/i18n/LanguageContext";

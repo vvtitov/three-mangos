@@ -41,7 +41,7 @@ export default function Logo() {
             alt="Logo version clara de three mangos"
             width={80}
             height={80}
-            className="hover:rotate-3 hover:scale-125 duration-500 cursor-pointer"
+            className="hover:rotate-3 hover:scale-115 duration-500 cursor-pointer"
           />
         ) : (
           // Logo negro para modo claro
@@ -50,7 +50,7 @@ export default function Logo() {
             alt="Logo version oscura de three mangos"
             width={80}
             height={80}
-            className="hover:rotate-3 hover:scale-125 duration-500 cursor-pointer"
+            className="hover:rotate-3 hover:scale-115 duration-500 cursor-pointer"
           />
         )}
       </a>

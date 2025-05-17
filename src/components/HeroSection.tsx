@@ -3,8 +3,7 @@ import { HeroParallax } from "./ui/hero-parallax";
 export default function Hero() {
   return (
     <>
-      <section
-        id="hero"
+      <div
         className="select-none w-full bg-background animate-in fade-in-0 duration-300"
       >
         <HeroParallax
@@ -76,19 +75,9 @@ export default function Hero() {
               link: "#",
               thumbnail: "/mango-2000x1440.png",
             },
-            {
-              title: "14",
-              link: "#",
-              thumbnail: "/mango-2000x1440.png",
-            },
-            {
-              title: "15",
-              link: "#",
-              thumbnail: "/mango-2000x1440.png",
-            },
           ]}
         />
-      </section>
+      </div>
     </>
   );
 }

@@ -103,7 +103,7 @@ const AnimatedItem = ({
               whiteSpace: "nowrap",
               position: 'absolute',
               top: '-5rem',
-              left: '-3rem',
+              left: '-5rem',
               transform: 'translateX(-50%)',
               display: 'flex',
               fontSize: '0.75rem',
@@ -111,7 +111,7 @@ const AnimatedItem = ({
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: '0.375rem',
-              backgroundColor: 'var(--secondary-foreground)',
+              backgroundColor: 'var(--primary)',
               zIndex: 50,
               boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04)',
               paddingLeft: '1rem',
@@ -125,7 +125,7 @@ const AnimatedItem = ({
             <div className="font-bold text-primary relative z-30 text-base">
               {item.name}
             </div>
-            <div className="text-primary-foreground text-lg md:text-xl">
+            <div className="text-foreground text-lg md:text-xl">
               {item.designation}
             </div>
           </motion.div>

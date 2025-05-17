@@ -8,7 +8,7 @@ export default function Footer() {
   const dictionary = getDictionary(locale);
 
   return (
-    <footer className="bg-background ">
+    <footer className="bg-background">
       <div>
         <div className="grid md:flex gap-20 justify-around mx-20">
           <div className="space-y-4">

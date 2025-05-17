@@ -6,7 +6,7 @@ import Logo from "./Logo";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getDictionary } from "@/i18n/dictionaries";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ArrowDownRightIcon, ChevronDown } from "lucide-react";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -67,11 +67,11 @@ export default function Header() {
 
   return (
     <>
-      <header
-        id="header"
-        className={`header fixed top-0 left-0 w-full transition-transform duration-300 bg-background ${
-          isScrolled ? "-translate-y-full" : "translate-y-0 fade-out-100"
-        } flex justify-between items-center max-w-full px-4 py-3 select-none dark:border-gray-200 z-[10]`}
+      <section
+        className={`fixed left-0 right-0 top-3 rounded-2xl mx-auto w-6xl transition-transform
+          duration-300 bg-background/90 shadow-sm shadow-black/20 ${
+          isScrolled ? "-translate-y-[8rem]" : "translate-y-0 fade-out-100"
+        } flex justify-between items-center max-w-full px-6 py-3 select-none z-[10]`}
       >
         <div id="leftHeader" className="flex items-center">
           <Logo />
@@ -86,12 +86,14 @@ export default function Header() {
             ref={languageMenuRef}
           >
             <div
-              className="flex items-center px-2 py-2 rounded-md text-foreground transition-colors duration-300 bg-transparent cursor-pointer"
+              className="flex items-center py-2 rounded-md text-foreground transition-colors duration-300 cursor-pointer"
               onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
             >
               {locale === "en" ? "EN" : "ES"}
-              <ChevronDown
-                className={`w-4 transition-transform duration-300 ${
+              <ArrowDownRightIcon
+                size={24}
+                strokeWidth={1.6}
+                className={`w-auto transition-transform duration-300 ${
                   isLanguageMenuOpen ? "rotate-180" : ""
                 }`}
               />
@@ -105,10 +107,10 @@ export default function Header() {
                 style={{
                   position: 'absolute',
                   top: '100%',
-                  left: '-1.3rem',
+                  left: '-1.7rem',
                   zIndex: 10,
                   width: 'auto',
-                  backgroundColor: 'rgba(var(--primary), 0.7)',
+                  backgroundColor: 'hsl(var(--background))',
                   borderBottomLeftRadius: '0.5rem',
                   borderBottomRightRadius: '0.5rem',
                   borderTopLeftRadius: '0.5rem',
@@ -124,40 +126,32 @@ export default function Header() {
                     setLocale("en");
                     setIsLanguageMenuOpen(false);
                   }}
-                  className="flex flex-row items-center text-foreground font-light hover:bg-primary/90 px-4 cursor-pointer rounded-t-xl py-3 transition-all duration-300"
-                >
-                  EN
+                  className="flex flex-row items-center text-foreground font-medium hover:bg-primary px-4 
+                  cursor-pointer rounded-t-xl py-3 transition-all duration-300 border border-foreground/30 border-b-0"
+                  >
+                    EN
                 </div>
                 <div
                   onClick={() => {
                     setLocale("es");
                     setIsLanguageMenuOpen(false);
                   }}
-                  className="flex flex-row items-center text-foreground font-light hover:bg-primary/90 px-4 cursor-pointer rounded-b-xl py-3"
+                  className="flex flex-row items-center text-foreground font-medium hover:bg-primary hover:text-foreground px-4 
+                  cursor-pointer rounded-b-xl py-3 border border-foreground/30"
                 >
                   ES
                 </div>
               </motion.div>
             )}
           </div>
-          <div className="flex items-center justify-end mr-3">
+          <div className="flex items-center justify-end">
             <BurguerMenu />
           </div>
           <div className="relative hidden lg:flex">
             <ModeSwitch />
           </div>
         </div>
-      </header>
-      {!isScrolled && (
-        <div className="absolute mt-[5.1rem] p-3 text-center text-sm w-full h-auto bg-primary/70 flex justify-center items-center mx-auto top-0 left-0 right-0 shadow-lg shadow-primary/30">
-          <span
-            className="w-full text-balance font-medium text-foreground"
-            dangerouslySetInnerHTML={{
-              __html: dictionary.header.offer,
-            }}
-          />
-        </div>
-      )}
+      </section>
     </>
   );
 }

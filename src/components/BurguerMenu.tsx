@@ -1,90 +1,165 @@
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import { ModeSwitch } from "./ui/dark-toggle-button";
+import { ModeSwitch } from "@/components/ui/dark-toggle-button";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { getDictionary } from "@/i18n/dictionaries";
+import { motion, AnimatePresence } from "framer-motion";
 
+// Definición de tipos para mejorar la tipificación y mantenibilidad
+type MenuItem = {
+  name: string;
+  link: string;
+};
 
-export default function BurgerMenu() {
+type BurgerMenuProps = {
+  // Propiedades para permitir extensibilidad futura
+  className?: string;
+};
+
+export default function BurgerMenu({ className = "" }: BurgerMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { locale } = useLanguage();
   const dictionary = getDictionary(locale);
 
-  const handleClose = () => {
-    setIsOpen(false);
+  // Handle para cerrar el menú
+  const handleClose = () => setIsOpen(false);
+  
+  // Handle para navegar a secciones sin recargar la página
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    handleClose();
+    
+    // Navegación suave a las secciones
+    const element = document.querySelector(href);
+    if (element) {
+      // Reducir el delay para una respuesta más rápida
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
   };
 
+  // Efecto para bloquear el scroll cuando el menú está abierto
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    // Usar una clase en lugar de manipular directamente el estilo
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    
+    // Cleanup
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.classList.remove("overflow-hidden");
     };
   }, [isOpen]);
+
+  // Generar dinámicamente los elementos del menú
+  const menuItems: MenuItem[] = [
+    { name: dictionary.header.about, link: "#about" },
+    { name: dictionary.header.services, link: "#services" },
+    { name: dictionary.header.contact, link: "#contact" },
+  ];
 
   return (
     <div
       id="burgerMenu"
-      className="w-full h-full lg:hidden flex flex-col items-end"
+      className={`w-full h-full lg:hidden flex flex-col items-end ${className}`}
+      aria-label="Mobile navigation menu"
+      role="navigation"
     >
-      {/* Mobile Menu Button */}
+      {/* Botón del menú móvil */}
       <button
-        className="dark:text-foreground text-foreground flex items-center justify-center"
+        className="text-foreground flex items-center justify-center p-2 focus:outline-none focus:ring-2 focus:ring-primary"
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle menu"
+        aria-expanded={isOpen}
+        aria-controls="mobile-menu"
+        aria-label={isOpen ? "Close menu" : "Open menu"}
       >
-        <img
-          src="/burguer-menu-light.svg"
-          alt="Burger Menu"
-          width={18}
-          height={18}
+        {/* Usar SVG directo en lugar de imágenes externas para mejor control */}
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="28" 
+          height="24" 
+          viewBox="0 0 28 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
           className="dark:hidden"
-        />
-        <img
-          src="/burguer-menu-dark.svg"
-          alt="Burger Menu"
-          width={18}
-          height={18}
+          aria-hidden="true"
+        >
+          <line x1="2" y1="8" x2="26" y2="8"></line>
+          <line x1="2" y1="16" x2="26" y2="16"></line>
+        </svg>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="28" 
+          height="24" 
+          viewBox="0 0 28 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
           className="hidden dark:block"
-        />
+          aria-hidden="true"
+        >
+          <line x1="2" y1="8" x2="26" y2="8"></line>
+          <line x1="2" y1="16" x2="26" y2="16"></line>
+        </svg>
+        <span className="sr-only">{isOpen ? "Close menu" : "Open menu"}</span>
       </button>
-      {/* Mobile Menu */}
-      <div
-        className="fixed top-0 left-0 w-full h-full bg-background z-[2] flex items-center justify-center overflow-hidden"
-        style={{ 
-          opacity: isOpen ? 1 : 0,
-          height: isOpen ? '100vh' : 0,
-          transition: 'opacity 0.3s ease-in-out, height 0.3s ease-in-out',
-          pointerEvents: isOpen ? "auto" : "none"
-        }}
-      >
-        <div className="flex flex-col text-center w-1/3 space-y-5">
-          <div className="mb-20">
-            <ModeSwitch />
-          </div>
-          {[
-            { name: dictionary.header.about, link: "#about" },
-            { name: dictionary.header.services, link: "#services" },
-            { name: dictionary.header.contact, link: "#contact" },
-          ].map((item) => (
-            <a href={item.link} key={item.name} onClick={(e) => { e.preventDefault(); handleClose(); window.location.href = item.link; }}>
-              <p
-                className="text-2xl text-foreground transition-colors hover:text-primary duration-300 cursor-pointer uppercase"
-              >
-                {item.name}
-              </p>
-            </a>
-          ))}
-          <div className="flex justify-center items-center pt-20">
-            <button
-              className="text-primary-foreground focus:outline-none hover:scale-105 border border-primary/60 rounded-full p-3 bg-primary hover:-z-2  transition-transform duration-700 justify-center items-center text-center"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Close menu"
+      
+      {/* Menú móvil con animaciones */} 
+      <AnimatePresence>
+        {isOpen && (
+          <motion.nav
+            id="mobile-menu"
+            className="fixed inset-0 bg-background z-50 flex items-center justify-center overflow-hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "100vh" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+          >
+            <motion.div
+              className="flex flex-col text-center w-full sm:w-2/3 md:w-1/2 space-y-7 px-4"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
             >
-              <X size={28} className="mx-auto"/>
-            </button>
-          </div>
-        </div>
-      </div>
+              <div className="relative top-[-10rem]">
+                <ModeSwitch />
+              </div>
+              
+              <nav className="flex flex-col space-y-6">
+                {menuItems.map((item) => (
+                  <a 
+                    href={item.link} 
+                    key={item.name} 
+                    onClick={(e) => handleNavigation(e, item.link)}
+                    className="text-2xl text-foreground transition-colors hover:text-primary duration-300 uppercase font-medium"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </nav>
+              
+              <motion.div 
+                className="flex justify-center items-center pt-20"
+              >
+                <button
+                  className="text-primary-foreground focus:outline-none focus:ring-2 focus:ring-primary/70 border border-primary/60 rounded-full p-3 bg-primary transition-all duration-300 flex justify-center items-center"
+                  onClick={handleClose}
+                  aria-label="Close menu"
+                >
+                  <X size={28} />
+                </button>
+              </motion.div>
+            </motion.div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

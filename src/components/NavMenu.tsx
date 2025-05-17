@@ -22,7 +22,7 @@ export default function NavMenu() {
 
   return (
     <>
-      <div id="navmenu" className="w-full bg-background">
+      <div id="navmenu" className="w-full">
         <NavigationMenu>
           <NavigationMenuList className="flex justify-end">
             <NavigationMenuItem>
@@ -32,7 +32,7 @@ export default function NavMenu() {
                 onClick={() => scrollToSection("#about")}
               >
                 <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} text-foreground dark:text-foreground`}
+                  className={`${navigationMenuTriggerStyle()} text-foreground dark:text-foreground hover:cursor-pointer`}
                 >
                   {dictionary.header.about}
                 </NavigationMenuLink>
@@ -45,7 +45,7 @@ export default function NavMenu() {
                 onClick={() => scrollToSection("#services")}
               >
                 <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} text-foreground dark:text-foreground`}
+                  className={`${navigationMenuTriggerStyle()} text-foreground dark:text-foreground hover:cursor-pointer`}
                 >
                   {dictionary.header.services}
                 </NavigationMenuLink>
@@ -58,7 +58,7 @@ export default function NavMenu() {
                 onClick={() => scrollToSection("#contact")}
               >
                 <NavigationMenuLink
-                  className={`${navigationMenuTriggerStyle()} text-foreground dark:text-foreground`}
+                  className={`${navigationMenuTriggerStyle()} text-foreground dark:text-foreground hover:cursor-pointer`}
                 >
                   {dictionary.header.contact}
                 </NavigationMenuLink>

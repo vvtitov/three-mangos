@@ -121,11 +121,11 @@ h6 {
 }
 
 .custom-shape-divider-top-1738168863 .shape-fill {
-  fill: hsl(210 40% 98%);
+  fill: var(--color-background);
 }
 
 .dark .custom-shape-divider-top-1738168863 .shape-fill {
-  fill: hsl(var(--theme-background));
+  fill: var(--color-background);
 }
 
 .custom-shape-divider-bottom-1738172143 {
@@ -146,11 +146,11 @@ h6 {
 }
 
 .custom-shape-divider-bottom-1738172143 .shape-fill {
-  fill: hsl(210 40% 98%);
+  fill: var(--color-background);
 }
 
 .dark .custom-shape-divider-bottom-1738172143 .shape-fill {
-  fill: hsl(var(--theme-background));
+  fill: var(--color-background);
 }
 
 .no-visible-scrollbar {
