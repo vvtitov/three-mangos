@@ -11,13 +11,11 @@ type Tab = {
 export const Tabs = ({
   tabs: propTabs,
   containerClassName,
-  activeTabClassName,
   tabClassName,
   contentClassName,
 }: {
   tabs: Tab[];
   containerClassName?: string;
-  activeTabClassName?: string;
   tabClassName?: string;
   contentClassName?: string;
 }) => {
@@ -59,10 +57,16 @@ export const Tabs = ({
               <motion.div
                 layoutId="clickedbutton"
                 transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
-                className={cn(
-                  "absolute inset-0 bg-gradient-to-tl from-primary to-primary/80 rounded-md",
-                  activeTabClassName
-                )}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'linear-gradient(to top left, var(--primary), rgba(var(--primary-rgb), 0.8))',
+                  borderRadius: '0.5rem',
+                  zIndex: 0
+                }}
               />
             )}
 
@@ -100,22 +104,26 @@ export const FadeInDiv = ({
   return (
     <div className="relative w-full h-full">
       {tabs.map((tab, idx) => (
-        <motion.div
-          key={tab.value}
-          layoutId={tab.value}
-          style={{
-            scale: 1 - idx * 0.1,
-            top: hovering ? idx * -30 : 0,
-            zIndex: -idx,
-            opacity: idx < 3 ? 1 - idx * 0.1 : 0,
-          }}
-          animate={{
-            y: isActive(tab) ? [0, 40, 0] : 0,
-          }}
-          className={cn("w-full h-full absolute top-0 left-0", className)}
-        >
-          {tab.content as React.ReactNode}
-        </motion.div>
+        <div key={tab.value} className={cn("w-full h-full absolute top-0 left-0", className)}>
+          <motion.div
+            layoutId={tab.value}
+            style={{
+              position: 'absolute',
+              top: hovering ? idx * -30 : 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              scale: 1 - idx * 0.1,
+              zIndex: -idx,
+              opacity: idx < 3 ? 1 - idx * 0.1 : 0,
+            }}
+            animate={{
+              y: isActive(tab) ? [0, 40, 0] : 0,
+            }}
+          >
+            {tab.content as React.ReactNode}
+          </motion.div>
+        </div>
       ))}
     </div>
   );

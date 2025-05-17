@@ -115,24 +115,34 @@ export default function BurgerMenu({ className = "" }: BurgerMenuProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.nav
-            id="mobile-menu"
-            className="fixed inset-0 bg-background z-50 flex items-center justify-center overflow-hidden"
+            style={{
+              position: "fixed",
+              inset: "0",
+              backgroundColor: "hsl(var(--background))",
+              zIndex: 50,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              overflow: "hidden",
+            }}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
           >
             <motion.div
-              className="flex flex-col text-center w-full sm:w-2/3 md:w-1/2 space-y-7 px-4"
-              initial={{ y: 20, opacity: 0 }}
+              style={{
+                y: 20,
+                opacity: 0,
+              }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
             >
-              <div className="relative top-[-10rem]">
+              <div className="relative mb-30 left-0 right-0">
                 <ModeSwitch />
               </div>
               
-              <nav className="flex flex-col space-y-6">
+              <nav className="flex flex-col space-y-3">
                 {menuItems.map((item) => (
                   <a 
                     href={item.link} 
@@ -146,7 +156,12 @@ export default function BurgerMenu({ className = "" }: BurgerMenuProps) {
               </nav>
               
               <motion.div 
-                className="flex justify-center items-center pt-20"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  paddingTop: "7rem",
+                }}
               >
                 <button
                   className="text-primary-foreground focus:outline-none focus:ring-2 focus:ring-primary/70 border border-primary/60 rounded-full p-3 bg-primary transition-all duration-300 flex justify-center items-center"

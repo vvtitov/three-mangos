@@ -86,22 +86,26 @@
     --chart-5: 340 75% 55%;
   }
   
-  body {
+  * {
     font-family: "Raleway", sans-serif;
+  }
+
+  body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Inter", sans-serif;
   }
 }
 
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Inter", sans-serif;
-}
   
 .custom-shape-divider-top-1738168863 {
   position: absolute;

@@ -3,32 +3,38 @@ import Carrousel from "@/components/ui/carrousel";
 export default function ServicesCarrousel() {
   return (
     <>
-      <div className="relative justify-center p-3 h-[600px] w-[70vmin]">
-        <Carrousel interval={5000} autoPlay={true} loop={true}
-          items={[
+      <div className="relative justify-center p-3">
+        <Carrousel
+          slides={[
             {
-              title: "Diseño Web",
-              image: "/mango-2000x1440.png",
+              title: "",
+              src: "/mango-2000x1440.png",
+              button: "",
             },
             {
-              title: "Desarrollo Frontend",
-              image: "/mango-2000x1440.png",
+              title: "",
+              src: "/mango-2000x1440.png",
+              button: "",
             },
             {
-              title: "Desarrollo Backend",
-              image: "/mango-2000x1440.png",
+              title: "",
+              src: "/mango-2000x1440.png",
+              button: "",
             },
             {
-              title: "E-commerce",
-              image: "/mango-2000x1440.png",
+              title: "",
+              src: "/mango-2000x1440.png",
+              button: "",
             },
             {
-              title: "SEO",
-              image: "/mango-2000x1440.png",
+              title: "",
+              src: "/mango-2000x1440.png",
+              button: "",
             },
             {
-              title: "Branding",
-              image: "/mango-2000x1440.png",
+              title: "",
+              src: "/mango-2000x1440.png",
+              button: "",
             },
           ]}
         />

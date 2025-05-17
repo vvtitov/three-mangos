@@ -4,24 +4,13 @@ import NavMenu from "./NavMenu";
 import BurguerMenu from "./BurguerMenu";
 import Logo from "./Logo";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { getDictionary } from "@/i18n/dictionaries";
 import { motion } from "framer-motion";
-import { ArrowDownRightIcon, ChevronDown } from "lucide-react";
+import { ArrowDownRightIcon } from "lucide-react";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const { locale, setLocale } = useLanguage();
-  const [dictionary, setDictionary] = useState({
-    header: {
-      home: "Home",
-      about: "About",
-      services: "Services",
-      contact: "Contact",
-      language: "Language",
-      offer: "<strong>We have 100% positive reviews 🏆</strong>",
-    }
-  });
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const languageMenuRef = useRef<HTMLDivElement | null>(null);
 
@@ -53,17 +42,6 @@ export default function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  useEffect(() => {
-    if (locale) {
-      try {
-        const dict = getDictionary(locale);
-        setDictionary(dict);
-      } catch (error) {
-        console.error("Error loading dictionary:", error);
-      }
-    }
-  }, [locale]);
 
   return (
     <>
@@ -106,7 +84,6 @@ export default function Header() {
                 transition={{ duration: 0.3 }}
                 style={{
                   position: 'absolute',
-                  top: '100%',
                   left: '-1.7rem',
                   zIndex: 10,
                   width: 'auto',
@@ -117,8 +94,7 @@ export default function Header() {
                   borderTopRightRadius: '0.5rem',
                   marginLeft: '0.75rem',
                   marginRight: '0.75rem',
-                  paddingTop: '0.75rem',
-                  paddingBottom: '0.75rem'
+                  marginTop: '150px',
                 }}
               >
                 <div
@@ -127,7 +103,7 @@ export default function Header() {
                     setIsLanguageMenuOpen(false);
                   }}
                   className="flex flex-row items-center text-foreground font-medium hover:bg-primary px-4 
-                  cursor-pointer rounded-t-xl py-3 transition-all duration-300 border border-foreground/30 border-b-0"
+                  cursor-pointer rounded-t-xl py-3 transition-all duration-300 border border-foreground/40 border-b-0"
                   >
                     EN
                 </div>
@@ -137,7 +113,7 @@ export default function Header() {
                     setIsLanguageMenuOpen(false);
                   }}
                   className="flex flex-row items-center text-foreground font-medium hover:bg-primary hover:text-foreground px-4 
-                  cursor-pointer rounded-b-xl py-3 border border-foreground/30"
+                  cursor-pointer rounded-b-xl py-3 border border-foreground/40"
                 >
                   ES
                 </div>
